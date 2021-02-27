@@ -1,5 +1,5 @@
 import React from "react";
-import { EnhancedFlight } from "./hooks/useEnhancedRoute";
+import { EnhancedFlight } from "../hooks/useEnhancedRoute";
 
 export interface IFoundFlightProps extends EnhancedFlight {
   className?: string;

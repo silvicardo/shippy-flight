@@ -1,28 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./css/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
 import { SWRConfig } from "swr";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
 });
-// Alter defaults after instance has been created
+
 axiosInstance.defaults.headers.common["Authorization"] = `Bearer 1 ${process.env.REACT_APP_AUTH_TOKEN}`;
 
 export const axiosGetFecther = (url: string) => axiosInstance.get(url).then((res) => res.data);
 
 ReactDOM.render(
   <React.StrictMode>
-    <SWRConfig
-      value={{
-        fetcher: axiosGetFecther,
-      }}
-    >
-      <App />
-    </SWRConfig>
+    <Provider store={store}>
+      <SWRConfig
+        value={{
+          fetcher: axiosGetFecther,
+        }}
+      >
+        <App />
+      </SWRConfig>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
