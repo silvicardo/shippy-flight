@@ -1,19 +1,23 @@
 import "./css/App.css";
-import RouteSearchForm from "./components/RouteSearchForm";
-import AirportSelect from "./components/AirportSelect";
 import React from "react";
-import RouteSearchResult from "./components/RouteSearchResult";
-import SearchingRoute from "./components/SearchingRoute";
+import AllFlightsPage from "./components/AllFlightsPage";
+import { Redirect, Route } from "react-router";
+import Navbar from "./components/Navbar";
+import SearchPage from "./components/SearchPage";
 
 function App() {
   return (
     <div className="App">
-      <RouteSearchForm>
-        <AirportSelect name={"departure"} label={"Partenza:"} />
-        <AirportSelect name={"arrival"} label={"Arrivo:"} />
-      </RouteSearchForm>
-      <SearchingRoute />
-      <RouteSearchResult />
+      <Navbar />
+      <Route exact path={"/search"}>
+        <SearchPage />
+      </Route>
+      <Route exact path={"/"}>
+        <AllFlightsPage />
+      </Route>
+      <Route path={"*"}>
+        <Redirect to="/" />
+      </Route>
     </div>
   );
 }

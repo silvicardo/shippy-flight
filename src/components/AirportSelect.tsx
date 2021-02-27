@@ -8,21 +8,21 @@ export interface IAirportSelectProps {
   label: string;
 }
 
-export const AirportSelect: React.FC<IAirportSelectProps> = ({ name, label }) => {
+export const AirportSelect = ({ className = "", name, label }: IAirportSelectProps) => {
   const { apiAirports, fieldValue, onChange, canFieldChange } = useSearchFormField(name);
 
   return (
-    <label>
-      {label}
-      <select name={name} value={fieldValue} onChange={onChange} disabled={!canFieldChange}>
-        <option value={0}>Scegli un aerporto</option>
+    <div className={`form-group ${className}`}>
+      <label className={"text-uppercase"}>{label}</label>
+      <select className="form-control" name={name} value={fieldValue} onChange={onChange} disabled={!canFieldChange}>
+        <option value={0}>Scegli un aeroporto</option>
         {apiAirports.map((airport) => (
           <option key={airport.id} value={airport.id}>
             {airport.codeIata} - {airport.id}
           </option>
         ))}
       </select>
-    </label>
+    </div>
   );
 };
 

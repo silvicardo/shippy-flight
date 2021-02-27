@@ -20,7 +20,8 @@ export default function useSearchFormField(name: SearchFieldName) {
     dispatch(setSearchAirportId({ field: e.target.name as SearchFieldName, value: +e.target.value }));
   };
 
-  const canFieldChange = departureAirportId === 0 || arrivalAirportId === 0 || !isSearchLoading;
+  const canFieldChange =
+    departureAirportId === arrivalAirportId || departureAirportId === 0 || arrivalAirportId === 0 || !isSearchLoading;
 
   return { apiAirports, fieldValue, departureAirportId, arrivalAirportId, onChange, isSearchLoading, canFieldChange };
 }

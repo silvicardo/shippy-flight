@@ -1,9 +1,11 @@
-import useApiResource from "./useApiResource";
-import { useCallback, useEffect, useState } from "react";
-import { Airport, Flight } from "../ApiEntitiesTypes";
+import { useCallback, useMemo } from "react";
+import { Flight } from "../ApiEntitiesTypes";
+import useAirport from "./useAirport";
 
 export interface EnhancedFlight extends Flight {
-  priceClass: "cheap" | "average" | "expensive";
+  departureAirportCode: string;
+  arrivalAirportCode: string;
+  priceClass: "economico" | "conveniente" | "premium";
   distance: number;
   duration: { hours: number; minutes: number; seconds: number };
 }
@@ -30,19 +32,18 @@ export const EURO_PER_KM_SCALE = {
   average: 6,
 } as const;
 
-export default function useEnhancedRoute(route: Flight[] | null | undefined): EnhancedFlight[] {
-  const { resourceMap: airportsMap } = useApiResource<Airport>("/airports/all");
-
-  const [enhancedRoute, setEnhancedRoute] = useState<EnhancedFlight[]>([]);
+export default function useEnhancedFlight(flight: Flight): EnhancedFlight {
+  const departureAirport = useAirport(flight.departureAirportId);
+  const arrivalAirport = useAirport(flight.arrivalAirportId);
 
   const getEnhancedFlightData = useCallback(
     (flight: Flight) => {
       const distance = parseInt(
         getDistanceFromLatLonInKm(
-          airportsMap[flight.departureAirportId].latitude,
-          airportsMap[flight.departureAirportId].longitude,
-          airportsMap[flight.arrivalAirportId].latitude,
-          airportsMap[flight.arrivalAirportId].longitude
+          departureAirport.latitude,
+          departureAirport.longitude,
+          arrivalAirport.latitude,
+          arrivalAirport.longitude
         ).toString()
       );
 
@@ -58,27 +59,21 @@ export default function useEnhancedRoute(route: Flight[] | null | undefined): En
 
       const priceClass =
         flight.price / distance < EURO_PER_KM_SCALE.cheap
-          ? "cheap"
+          ? "economico"
           : flight.price / distance < EURO_PER_KM_SCALE.average
-          ? "average"
-          : "expensive";
+          ? "conveniente"
+          : "premium";
 
       return {
+        departureAirportCode: departureAirport.codeIata,
+        arrivalAirportCode: arrivalAirport.codeIata,
         priceClass: priceClass,
         distance: distance,
         duration: { hours: hours, minutes: showingMinutes, seconds: seconds },
       } as const;
     },
-    [airportsMap]
+    [departureAirport, arrivalAirport]
   );
 
-  useEffect(() => {
-    if (route) {
-      setEnhancedRoute(route.map((flight) => ({ ...flight, ...getEnhancedFlightData(flight) })));
-    } else {
-      setEnhancedRoute([] as EnhancedFlight[]);
-    }
-  }, [route, getEnhancedFlightData]);
-
-  return enhancedRoute;
+  return useMemo(() => ({ ...flight, ...getEnhancedFlightData(flight) }), [flight, getEnhancedFlightData]);
 }

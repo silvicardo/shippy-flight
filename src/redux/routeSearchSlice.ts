@@ -25,7 +25,11 @@ export const routeSearchSlice = createSlice({
         state.arrivalAirportId = +action.payload.value;
       }
     },
+    resetSearchFields: (state) => {
+      state.departureAirportId = 0;
+      state.arrivalAirportId = 0;
+    },
   },
 });
 
-export const { setSearchAirportId } = routeSearchSlice.actions;
+export const { setSearchAirportId, resetSearchFields } = routeSearchSlice.actions;

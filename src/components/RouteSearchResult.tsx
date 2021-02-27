@@ -12,15 +12,23 @@ export const RouteSearchResult = ({ className = "" }: IRouteSearchResultProps) =
   return (
     <>
       {!isLoading && routeFlights.length > 0 ? (
-        <div className={`flights-results ${className}`}>
-          <h2>
-            Hai scelto di volare da {departureAirportCode} a {arrivalAirportCode}
-          </h2>
-
-          <h3>{routeFlights.length === 1 ? "TRATTA DIRETTA" : "TRATTA CON SCALO"}</h3>
-          {routeFlights.map((flight) => (
-            <FoundFlight key={flight.id} {...flight} />
-          ))}
+        <div className={`flights-results container ${className}`}>
+          <div className={"mb-3"}>
+            <h2>
+              Hai scelto di volare da {departureAirportCode} a {arrivalAirportCode}
+            </h2>
+          </div>
+          <div className={"mb-5"}>
+            <h3>{routeFlights.length === 1 ? "TRATTA DIRETTA" : "TRATTA CON SCALO"}</h3>
+          </div>
+          <div className={"row justify-content-center align-items-center"}>
+            {routeFlights.map((flight, index) => (
+              <React.Fragment key={flight.id}>
+                <FoundFlight {...flight} />
+                <div className={"mr-3"}>{index + 1 < routeFlights.length ? <b>{" > "}</b> : ""}</div>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       ) : null}
     </>

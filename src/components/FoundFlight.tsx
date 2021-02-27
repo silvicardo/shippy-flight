@@ -1,17 +1,23 @@
 import React from "react";
-import { EnhancedFlight } from "../hooks/useEnhancedRoute";
+import useEnhancedFlight from "../hooks/useEnhancedFlight";
+import { Flight } from "../ApiEntitiesTypes";
 
-export interface IFoundFlightProps extends EnhancedFlight {
+export interface IFoundFlightProps extends Flight {
   className?: string;
 }
 
-export const FoundFlight: React.FC<IFoundFlightProps> = (props) => {
+export const FoundFlight = ({ className = "", ...flight }: IFoundFlightProps) => {
+  const enhancedFlight = useEnhancedFlight(flight);
+
   return (
     <div className={"flight-result"}>
-      <p>Arline id : {props.airlineId}</p>
-      <p>Price: {props.price} </p>
+      <p>Arline id : {flight.airlineId}</p>
       <p>
-        <b>{props.priceClass}</b>
+        Da {enhancedFlight.departureAirportCode} a {enhancedFlight.arrivalAirportCode}
+      </p>
+      <p>Price: {flight.price} € </p>
+      <p>
+        <b>{enhancedFlight.priceClass}</b>
       </p>
     </div>
   );

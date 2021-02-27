@@ -7,6 +7,7 @@ import axios from "axios";
 import { SWRConfig } from "swr";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -19,13 +20,15 @@ export const axiosGetFecther = (url: string) => axiosInstance.get(url).then((res
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <SWRConfig
-        value={{
-          fetcher: axiosGetFecther,
-        }}
-      >
-        <App />
-      </SWRConfig>
+      <Router>
+        <SWRConfig
+          value={{
+            fetcher: axiosGetFecther,
+          }}
+        >
+          <App />
+        </SWRConfig>
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

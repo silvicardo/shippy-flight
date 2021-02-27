@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import useEnhancedRoute from "./useEnhancedRoute";
 import { Flight } from "../ApiEntitiesTypes";
 import { useMemo } from "react";
 import useRouteSearchForm from "./useRouteSearchForm";
@@ -15,10 +14,8 @@ export default function useRouteSearch() {
 
   const isLoading = useMemo(() => !error && !data, [error, data]);
 
-  const enhancedRoute = useEnhancedRoute(data?.data ? data.data : null);
-
   return {
-    route: enhancedRoute,
+    route: data?.data ? data.data : [],
     departureAirportCode,
     arrivalAirportCode,
     isLoading,
