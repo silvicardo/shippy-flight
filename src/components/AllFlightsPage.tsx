@@ -1,6 +1,6 @@
 import React from "react";
 import useApiResource from "../hooks/useApiResource";
-import { Flight } from "../ApiEntitiesTypes";
+import { Airport, Flight } from "../ApiEntitiesTypes";
 import FlightsTable from "./FlightsTable";
 
 export interface IAllFlightsViewProps {
@@ -8,9 +8,11 @@ export interface IAllFlightsViewProps {
 }
 
 export const AllFlightsPage = (props: IAllFlightsViewProps) => {
-  const { resource: allFlights, isLoading } = useApiResource<Flight>("/flights/all");
+  const { isLoading: isLoadingAirports } = useApiResource<Airport>("/airports/all");
+  const { resource: allFlights, isLoading: isLoadingFlights } = useApiResource<Flight>("/flights/all");
 
-  if (isLoading) return null;
+  if (isLoadingAirports || isLoadingFlights) return null;
+
   return (
     <div className={"container pt-5"}>
       <section className={"our-flights"}>
