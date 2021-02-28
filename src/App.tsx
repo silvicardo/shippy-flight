@@ -1,9 +1,9 @@
 import "./css/App.css";
 import React from "react";
-import AllFlightsPage from "./components/AllFlightsPage";
+import AllFlightsPage from "./components/Pages/AllFlightsPage";
 import { Redirect, Route } from "react-router";
 import Navbar from "./components/Navbar";
-import SearchPage from "./components/SearchPage";
+import SearchPage from "./components/Pages/SearchPage";
 
 function App() {
   return (

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import RouteSearchForm from "./RouteSearchForm";
-import AirportSelect from "./AirportSelect";
-import RouteSearchLoading from "./RouteSearchLoading";
-import RouteSearchResult from "./RouteSearchResult";
+import RouteSearchForm from "../RouteSearch/RouteSearchForm";
+import RouteSearchFormAirportSelect from "../RouteSearch/RouteSearchFormAirportSelect";
+import RouteSearchLoading from "../RouteSearch/RouteSearchLoading";
+import RouteSearchResult from "../RouteSearch/RouteSearchResult";
 import { useDispatch } from "react-redux";
-import { resetSearchFields } from "../redux/routeSearchSlice";
+import { resetSearchFields } from "../../redux/routeSearchSlice";
 
 export interface ISearchPageProps {
   className?: string;
@@ -19,8 +19,8 @@ export const SearchPage: React.FC<ISearchPageProps> = (props) => {
     <div className={"container"}>
       <RouteSearchForm className={"mt-5"}>
         <div className="form-row">
-          <AirportSelect className={"offset-md-2 col-md-4"} name={"departure"} label={"Partenza:"} />
-          <AirportSelect className={"col-md-4"} name={"arrival"} label={"Arrivo:"} />
+          <RouteSearchFormAirportSelect className={"offset-md-2 col-md-4"} name={"departure"} label={"Partenza:"} />
+          <RouteSearchFormAirportSelect className={"col-md-4"} name={"arrival"} label={"Arrivo:"} />
         </div>
       </RouteSearchForm>
       <RouteSearchLoading />

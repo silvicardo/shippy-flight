@@ -1,13 +1,19 @@
 import React from "react";
 import FlightsTableRow from "./FlightsTableRow";
-import { Flight } from "../ApiEntitiesTypes";
+import { Airport, Flight } from "../../ApiEntitiesTypes";
+import useApiResource from "../../hooks/useApiResource";
+import useFilteredFlights from "../../hooks/useFilteredFlights";
 
 export interface IFlightsTableProps {
   className?: string;
-  flights: Flight[];
 }
 
-export const FlightsTable = ({ flights, className = "" }: IFlightsTableProps) => {
+export const FlightsTable = ({ className = "" }: IFlightsTableProps) => {
+  const { isFilterActive, filteredFlights } = useFilteredFlights();
+  if (filteredFlights.length === 0) {
+    if (isFilterActive) return <p>Nessun risultato per la tua ricerca</p>;
+    return null;
+  }
   return (
     <table className={`table ${className}`}>
       <thead className="thead-light">
@@ -20,7 +26,7 @@ export const FlightsTable = ({ flights, className = "" }: IFlightsTableProps) =>
         </tr>
       </thead>
       <tbody>
-        {flights.map((flight) => (
+        {filteredFlights.map((flight) => (
           <FlightsTableRow key={flight.id} {...flight} />
         ))}
       </tbody>

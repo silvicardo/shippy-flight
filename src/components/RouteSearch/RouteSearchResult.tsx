@@ -1,5 +1,5 @@
 import React from "react";
-import useRouteSearch from "../hooks/useRouteSearch";
+import useRouteSearch from "../../hooks/useRouteSearch";
 import FoundFlight from "./FoundFlight";
 
 export interface IRouteSearchResultProps {

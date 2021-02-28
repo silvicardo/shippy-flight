@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootReduxState } from "../redux/store";
-import useRouteSearch from "../hooks/useRouteSearch";
+import { RootReduxState } from "../../redux/store";
+import useRouteSearch from "../../hooks/useRouteSearch";
 
 export interface IRouteSearchLoadingProps {
   className?: string;

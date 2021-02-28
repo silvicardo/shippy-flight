@@ -1,7 +1,12 @@
 .App {
   text-align: center;
 }
-
+.filter-close {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  cursor: pointer;
+}
 .flight-result {
   border: 1px solid black;
   border-radius: 3px;

@@ -1,6 +1,6 @@
 import React from "react";
-import useEnhancedFlight from "../hooks/useEnhancedFlight";
-import { Flight } from "../ApiEntitiesTypes";
+import useEnhancedFlight from "../../hooks/useEnhancedFlight";
+import { Flight } from "../../ApiEntitiesTypes";
 
 export interface IFlightsTableRowProps extends Flight {
   className?: string;

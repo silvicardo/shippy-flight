@@ -7,9 +7,9 @@ export interface INavbarProps {
 
 export const Navbar = ({ className = "" }: INavbarProps) => {
   const { pathname } = useLocation();
-  console.log(pathname);
+
   return (
-    <nav className={`navbar navbar-expand-lg navbar-light bg-light ${className}`}>
+    <nav className={`navbar navbar-expand-lg navbar-light bg-light sticky-top ${className}`}>
       <div className={"container"}>
         <Link className="navbar-brand" to="/">
           Shippy-Fly

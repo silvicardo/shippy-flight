@@ -1,20 +1,29 @@
 import React from "react";
-import { SearchFieldName } from "../redux/routeSearchSlice";
-import useSearchFormField from "../hooks/useSearchFormField";
+import { Airport } from "../ApiEntitiesTypes";
 
 export interface IAirportSelectProps {
   className?: string;
-  name: SearchFieldName;
   label: string;
+  name: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  value: string | number;
+  disabled: boolean;
+  apiAirports: Airport[];
 }
 
-export const AirportSelect = ({ className = "", name, label }: IAirportSelectProps) => {
-  const { apiAirports, fieldValue, onChange, canFieldChange } = useSearchFormField(name);
-
+export const AirportSelect = ({
+  className = "",
+  label,
+  name,
+  value,
+  onChange,
+  disabled,
+  apiAirports,
+}: IAirportSelectProps) => {
   return (
     <div className={`form-group ${className}`}>
       <label className={"text-uppercase"}>{label}</label>
-      <select className="form-control" name={name} value={fieldValue} onChange={onChange} disabled={!canFieldChange}>
+      <select className="form-control" name={name} value={value} onChange={onChange} disabled={disabled}>
         <option value={0}>Scegli un aeroporto</option>
         {apiAirports.map((airport) => (
           <option key={airport.id} value={airport.id}>
