@@ -14,7 +14,7 @@ export const SearchRoutePage = ({ className = "" }: ISearchRoutePageProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(resetSearchFields());
-  }, []);
+  }, [dispatch]);
   return (
     <div className={`container ${className}`}>
       <RouteSearchForm className={"mt-5"}>

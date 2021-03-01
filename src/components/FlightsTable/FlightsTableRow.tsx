@@ -12,7 +12,7 @@ export const FlightsTableRow = ({ className = "", ...flight }: IFlightsTableRowP
 
   return (
     <tr key={flight.id}>
-      <td scope="row">{enhancedFlight.departureAirportCode}</td>
+      <td>{enhancedFlight.departureAirportCode}</td>
       <td>{enhancedFlight.arrivalAirportCode}</td>
       <td>{enhancedFlight.airlineName}</td>
       <td>
