@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
-axiosInstance.defaults.headers.common["Authorization"] = `Bearer 1 ${process.env.REACT_APP_AUTH_TOKEN}`;
+axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`;
 
 export const axiosGetFecther = (url: string) => axiosInstance.get(url).then((res) => res.data);
 
