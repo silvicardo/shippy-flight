@@ -1,15 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// **** SLICE STATE TYPE ******//
-
 export type FlightsFilterSliceState = {
   isActive: boolean;
   airportTypology: "departure" | "arrival";
   airportId: number;
   priceOrdering: "asc" | "desc";
 };
-
-// **** REDUCER CASE FUNCTIONS ******//
 
 const initialState: FlightsFilterSliceState = {
   isActive: false,
