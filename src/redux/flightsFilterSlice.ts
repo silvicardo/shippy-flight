@@ -22,6 +22,12 @@ export const flightsFilterSlice = createSlice({
   reducers: {
     setIsFlightsFilterActive: (state, action: PayloadAction<boolean>) => {
       state.isActive = action.payload;
+      if (!action.payload) {
+        state.isActive = false;
+        state.airportTypology = "departure";
+        state.airportId = 0;
+        state.priceOrdering = "asc";
+      }
     },
     setFlightsFilterAirportTypology: (state, action: PayloadAction<FlightsFilterSliceState["airportTypology"]>) => {
       state.airportTypology = action.payload;
