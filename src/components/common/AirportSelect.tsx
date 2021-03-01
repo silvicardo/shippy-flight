@@ -1,9 +1,9 @@
-import React from "react";
-import { Airport } from "../ApiEntitiesTypes";
+import React, { ReactElement } from "react";
+import { Airport } from "../../ApiEntitiesTypes";
 
 export interface IAirportSelectProps {
   className?: string;
-  label: string;
+  label: string | ReactElement;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   value: string | number;
@@ -27,7 +27,7 @@ export const AirportSelect = ({
         <option value={0}>Scegli un aeroporto</option>
         {apiAirports.map((airport) => (
           <option key={airport.id} value={airport.id}>
-            {airport.codeIata} - {airport.id}
+            {airport.codeIata}
           </option>
         ))}
       </select>

@@ -23,11 +23,13 @@ export const FlightsFilter: React.FC<IFlightsFilterProps> = ({ className = "" })
   }
   return (
     <>
-      <form className={`border border-dark rounded py-4 px-4 px-md-0 position-relative ${className}`}>
+      <form className={`border border-dark rounded py-4 px-4 px-md-0 bg-info position-relative ${className}`}>
         <FlightsFilterCloseButton className={"filter-close"} />
         <div className="form-row">
           <div className="col-12 col-md-4">
-            <p className={"text-uppercase"}>Tipologia Aeroporto</p>
+            <p className={"text-uppercase text-white text-white"}>
+              <b>Tipologia Aeroporto</b>
+            </p>
             <div className="form-check form-check-inline">
               <FlightsFilterAirportTypologyInputRadio
                 value={"departure"}
@@ -45,7 +47,9 @@ export const FlightsFilter: React.FC<IFlightsFilterProps> = ({ className = "" })
             <FlightsFilterAirportSelect />
           </div>
           <div className="col-12 col-md-4">
-            <p className={"text-uppercase"}>Ordinamento Prezzo</p>
+            <p className={"text-uppercase text-white"}>
+              <b>Ordinamento Prezzo</b>
+            </p>
             <div className="form-check form-check-inline">
               <FlightsFilterPriceOrderingInputRadio
                 value={"asc"}

@@ -16,9 +16,9 @@ export const FlightsTable = ({ className = "" }: IFlightsTableProps) => {
     <table className={`table ${className}`}>
       <thead className="thead-light">
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Da</th>
           <th scope="col">A</th>
+          <th scope="col">Compagnia</th>
           <th scope="col">Durata</th>
           <th scope="col">Costo</th>
         </tr>

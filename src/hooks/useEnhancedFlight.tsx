@@ -1,8 +1,10 @@
 import { useCallback, useMemo } from "react";
 import { Flight } from "../ApiEntitiesTypes";
 import useAirport from "./useAirport";
+import useAirline from "./useAirline";
 
-export interface EnhancedFlight extends Flight {
+export interface EnhancedFlight extends Pick<Flight, "id"> {
+  airlineName: string;
   departureAirportCode: string;
   arrivalAirportCode: string;
   priceClass: "economico" | "conveniente" | "premium";
@@ -33,47 +35,66 @@ export const EURO_PER_KM_SCALE = {
 } as const;
 
 export default function useEnhancedFlight(flight: Flight): EnhancedFlight {
-  const departureAirport = useAirport(flight.departureAirportId);
-  const arrivalAirport = useAirport(flight.arrivalAirportId);
+  const {
+    latitude: departureAirportLatitude,
+    longitude: departureAirportLongitude,
+    codeIata: departureAirportIata,
+  } = useAirport(flight.departureAirportId);
+  const {
+    latitude: arrivalAirportLatitude,
+    longitude: arrivalAirportLongitude,
+    codeIata: arrivalAirportIata,
+  } = useAirport(flight.arrivalAirportId);
 
-  const getEnhancedFlightData = useCallback(
-    (flight: Flight) => {
-      const distance = parseInt(
-        getDistanceFromLatLonInKm(
-          departureAirport.latitude,
-          departureAirport.longitude,
-          arrivalAirport.latitude,
-          arrivalAirport.longitude
-        ).toString()
-      );
+  const { name: airlineName } = useAirline(flight.airlineId);
 
-      let time = +distance / PLANE_KM_PER_HOUR;
+  const getEnhancedFlightData = useCallback(() => {
+    const distance = parseInt(
+      getDistanceFromLatLonInKm(
+        departureAirportLatitude,
+        departureAirportLongitude,
+        arrivalAirportLatitude,
+        arrivalAirportLongitude
+      ).toString()
+    );
 
-      let timeInSeconds = time * 60 * 60;
+    let time = +distance / PLANE_KM_PER_HOUR;
 
-      let hours = Math.floor(timeInSeconds / 3600);
+    let timeInSeconds = time * 60 * 60;
 
-      let seconds = timeInSeconds % 60;
+    let hours = Math.floor(timeInSeconds / 3600);
 
-      let showingMinutes = parseInt((((time - hours) * 3600) / 60).toString());
+    let seconds = timeInSeconds % 60;
 
-      const priceClass =
-        flight.price / distance < EURO_PER_KM_SCALE.cheap
-          ? "economico"
-          : flight.price / distance < EURO_PER_KM_SCALE.average
-          ? "conveniente"
-          : "premium";
+    let showingMinutes = parseInt((((time - hours) * 3600) / 60).toString());
 
-      return {
-        departureAirportCode: departureAirport.codeIata,
-        arrivalAirportCode: arrivalAirport.codeIata,
-        priceClass: priceClass,
-        distance: distance,
-        duration: { hours: hours, minutes: showingMinutes, seconds: seconds },
-      } as const;
-    },
-    [departureAirport, arrivalAirport]
-  );
+    const priceClass =
+      flight.price / distance < EURO_PER_KM_SCALE.cheap
+        ? "economico"
+        : flight.price / distance < EURO_PER_KM_SCALE.average
+        ? "conveniente"
+        : "premium";
 
-  return useMemo(() => ({ ...flight, ...getEnhancedFlightData(flight) }), [flight, getEnhancedFlightData]);
+    return {
+      id: flight.id,
+      airlineName: airlineName,
+      departureAirportCode: departureAirportIata,
+      arrivalAirportCode: arrivalAirportIata,
+      priceClass: priceClass,
+      distance: distance,
+      duration: { hours: hours, minutes: showingMinutes, seconds: seconds },
+    } as const;
+  }, [
+    departureAirportLatitude,
+    departureAirportLongitude,
+    arrivalAirportLatitude,
+    arrivalAirportLongitude,
+    airlineName,
+    departureAirportIata,
+    arrivalAirportIata,
+    flight.price,
+    flight.id,
+  ]);
+
+  return useMemo(() => getEnhancedFlightData(), [getEnhancedFlightData]);
 }

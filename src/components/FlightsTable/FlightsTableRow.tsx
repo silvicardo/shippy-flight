@@ -1,7 +1,7 @@
 import React from "react";
 import useEnhancedFlight from "../../hooks/useEnhancedFlight";
 import { Flight } from "../../ApiEntitiesTypes";
-import FlightDurationLabel from "../FlightDurationLabel";
+import FlightDurationLabel from "../common/FlightDurationLabel";
 
 export interface IFlightsTableRowProps extends Flight {
   className?: string;
@@ -12,9 +12,9 @@ export const FlightsTableRow = ({ className = "", ...flight }: IFlightsTableRowP
 
   return (
     <tr key={flight.id}>
-      <th scope="row">{flight.id}</th>
-      <td>{enhancedFlight.departureAirportCode}</td>
+      <td scope="row">{enhancedFlight.departureAirportCode}</td>
       <td>{enhancedFlight.arrivalAirportCode}</td>
+      <td>{enhancedFlight.airlineName}</td>
       <td>
         <FlightDurationLabel hours={enhancedFlight.duration.hours} minutes={enhancedFlight.duration.minutes} />
       </td>

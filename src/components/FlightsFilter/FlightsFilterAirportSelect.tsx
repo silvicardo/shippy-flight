@@ -1,5 +1,5 @@
 import React from "react";
-import AirportSelect from "../AirportSelect";
+import AirportSelect from "../common/AirportSelect";
 import useApiResource from "../../hooks/useApiResource";
 import { Airport } from "../../ApiEntitiesTypes";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +22,7 @@ export const FlightsFilterAirportSelect: React.FC<IFlightsFilterAirportSelectPro
   return (
     <AirportSelect
       className={className}
-      label={"Aeroporti"}
+      label={<b className={"text-white"}>Aeroporto</b>}
       name={"airport"}
       onChange={onAirportSelectChange}
       value={airportId}

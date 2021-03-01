@@ -1,5 +1,5 @@
 import React from "react";
-import InputRadio, { IInputRadioProps } from "../InputRadio";
+import InputRadio, { IInputRadioProps } from "../common/InputRadio";
 import { useDispatch, useSelector } from "react-redux";
 import { RootReduxState } from "../../redux/store";
 import { setFlightsFilterAirportTypology } from "../../redux/flightsFilterSlice";

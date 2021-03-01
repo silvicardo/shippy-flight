@@ -28,8 +28,8 @@ export const Navbar = ({ className = "" }: INavbarProps) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className={`nav-item ${pathname}` === "/search" ? "active" : ""}>
-              <Link className={"nav-link"} to={"/search"}>
-                Ricerca
+              <Link className={"nav-link"} to={"/route-search"}>
+                Ricerca Tratta
               </Link>
             </li>
           </ul>

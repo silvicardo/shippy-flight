@@ -1,7 +1,7 @@
 import React from "react";
 import { SearchFieldName } from "../../redux/routeSearchSlice";
 import useSearchFormField from "../../hooks/useSearchFormField";
-import AirportSelect from "../AirportSelect";
+import AirportSelect from "../common/AirportSelect";
 
 export interface IRouteSearchFormAirportSelectProps {
   className?: string;
