@@ -13,7 +13,7 @@ Fornisce una lista di tutti i voli con possibilità di filtraggio per
 ### 2. Ricerca Tratta
 Fornisce una ricerca della migliore tratta a partire da un aeroporto di partenza e uno di arrivo mostrando gli eventuali scali.
 
-### SCELTE TECNOLOGICHE/PRATICHE
+## SCELTE TECNOLOGICHE/PRATICHE
 
 Ho fatto uso di:
 - [Create React App](https://github.com/facebook/create-react-app) per avere uno scheletro standard adatto alla natura del progetto (NO SEO).
