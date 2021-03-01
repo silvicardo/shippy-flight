@@ -1,7 +1,5 @@
 import React from "react";
 import FlightsTableRow from "./FlightsTableRow";
-import { Airport, Flight } from "../../ApiEntitiesTypes";
-import useApiResource from "../../hooks/useApiResource";
 import useFilteredFlights from "../../hooks/useFilteredFlights";
 
 export interface IFlightsTableProps {
