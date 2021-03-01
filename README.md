@@ -17,6 +17,7 @@ Fornisce una ricerca della migliore tratta a partire da un aeroporto di partenza
 
 Ho fatto uso di:
 - [Create React App](https://github.com/facebook/create-react-app) per avere uno scheletro standard adatto alla natura del progetto (NO SEO).
+- [Typescript](https://www.typescriptlang.org/) per una maggiore sicurezza e chiarezza del codice.
 - [SWR](https://swr.vercel.app/) per gestire la comunicazione con le api e conservazione relativo dato in modo standardizzato e condividendone lo stato con l'intera applicazione. 
 - [Redux Toolkit](https://redux-toolkit.js.org/) per la gestione dello stato locale (stato filtro voli, stato ricerca tratta).
 - [Custom React Hooks](https://it.reactjs.org/docs/hooks-custom.html) per l'incapsulazione di funzionalità
